@@ -2,6 +2,9 @@ const jestConfig = require("./jest.config");
 
 let page;
 
+beforeEach(async () => {
+  page = await browser.newPage();
+})
 
 afterEach(() => {
   page.close();
@@ -10,7 +13,6 @@ afterEach(() => {
 describe("Github page tests", () => {
 
   beforeEach(async () => {
-    page = await browser.newPage();
     await page.goto("https://github.com/team");
   });
 
@@ -40,7 +42,6 @@ describe("Github page tests", () => {
 describe("Github loginPage tests", () => {
     
   beforeEach(async () => {
-    page = await browser.newPage();
     await page.goto("https://github.com/login");
   });
 
@@ -79,14 +80,14 @@ describe("Netology DevelopmentPage tests", () => {
   }, 6000);
 
   test("Open MiddleQA page", async () => {
-    const link = await page.$eval('[data-program-id="29630"]', link => link.getAttribute('href') );
+    const link = await page.$eval('[data-program-id="29631"]', link => link.getAttribute('href') );
     await page.goto("https://netology.ru" + link);
     const actual = await page.title();
     expect(actual).toEqual("Тестировщик – обучение QA-инженеров на курсе в Нетологии");
   }, 6000);
 
   test("Switching to the course entry form MiddleQA", async () => {
-    const link = await page.$eval('[data-program-id="29630"]', link => link.getAttribute('href') );
+    const link = await page.$eval('[data-program-id="29631"]', link => link.getAttribute('href') );
     await page.goto("https://netology.ru" + link);
     await page.click("[name='button']");
     const btnSelector = "[name='buttons.orderButton']";
